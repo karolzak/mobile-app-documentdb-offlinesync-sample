@@ -111,7 +111,7 @@ namespace MobileAppDocDBOfflineSyncSample.iOS
             if (string.IsNullOrWhiteSpace(itemText.Text))
                 return;
 
-            var newItem = new ToDoItem
+            var newItem = new ToDoItemDocDb
             {
                 Text = itemText.Text,
                 Complete = false

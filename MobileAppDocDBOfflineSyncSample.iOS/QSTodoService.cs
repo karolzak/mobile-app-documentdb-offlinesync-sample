@@ -32,7 +32,7 @@ namespace MobileAppDocDBOfflineSyncSample.iOS
 
         private IMobileServiceSyncTable<ToDoItem> todoTable;
 #else
-        private IMobileServiceTable<ToDoItem> todoTable;
+        private IMobileServiceTable<ToDoItemDocDb> todoTable;
 #endif
 
         private QSTodoService ()
@@ -49,7 +49,7 @@ namespace MobileAppDocDBOfflineSyncSample.iOS
             // Create an MSTable instance to allow us to work with the TodoItem table
             todoTable = client.GetSyncTable<ToDoItem>();
 #else
-            todoTable = client.GetTable<ToDoItem>();
+            todoTable = client.GetTable<ToDoItemDocDb>();
 #endif
         }
 
@@ -59,7 +59,7 @@ namespace MobileAppDocDBOfflineSyncSample.iOS
             }
         }
 
-        public List<ToDoItem> Items { get; private set;}
+        public List<ToDoItemDocDb> Items { get; private set;}
 
         public async Task InitializeStoreAsync()
         {
@@ -93,7 +93,7 @@ namespace MobileAppDocDBOfflineSyncSample.iOS
 #endif
         }
 
-        public async Task<List<ToDoItem>> RefreshDataAsync ()
+        public async Task<List<ToDoItemDocDb>> RefreshDataAsync ()
         {
             try {
 #if OFFLINE_SYNC_ENABLED
@@ -114,7 +114,7 @@ namespace MobileAppDocDBOfflineSyncSample.iOS
             return Items;
         }
 
-        public async Task InsertTodoItemAsync (ToDoItem todoItem)
+        public async Task InsertTodoItemAsync (ToDoItemDocDb todoItem)
         {
             try {
                 await todoTable.InsertAsync (todoItem); // Insert a new TodoItem into the local database.
@@ -129,7 +129,7 @@ namespace MobileAppDocDBOfflineSyncSample.iOS
             }
         }
 
-        public async Task CompleteItemAsync (ToDoItem item)
+        public async Task CompleteItemAsync (ToDoItemDocDb item)
         {
             try {
                 item.Complete = true;
