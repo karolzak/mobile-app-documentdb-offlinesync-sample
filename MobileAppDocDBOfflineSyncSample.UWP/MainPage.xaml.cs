@@ -14,7 +14,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using MobileAppDocDBOfflineSyncSample.Droid;
+using MobileAppDocDBOfflineSyncSample.DataModel.UWP;
 
 #if OFFLINE_SYNC_ENABLED
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;  // offline sync
@@ -25,6 +25,7 @@ namespace MobileAppDocDBOfflineSyncSample
 {
     public sealed partial class MainPage : Page
     {
+        private DateTimeOffset lastUpdateTimeStamp = DateTime.Now;
         private MobileServiceCollection<TodoItemDocDb, TodoItemDocDb> items;
 #if OFFLINE_SYNC_ENABLED
         private IMobileServiceSyncTable<TodoItemDocDb> todoTable = App.MobileService.GetSyncTable<TodoItemDocDb>(); // offline sync
@@ -160,8 +161,11 @@ namespace MobileAppDocDBOfflineSyncSample
         {
             try
             {
+                
+
                 await App.MobileService.SyncContext.PushAsync();
-           await todoTable.PullAsync("todoItemsDocDb", todoTable.CreateQuery());
+                await todoTable.PullAsync("allTodoItemDocDb", todoTable.CreateQuery());
+                 //lastUpdateTimeStamp = DateTime.Now;
             }
             catch { }
 

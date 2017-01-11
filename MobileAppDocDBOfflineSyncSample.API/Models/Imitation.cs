@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobileAppDocDBOfflineSyncSample.Shared
+namespace MobileAppDocDBOfflineSyncSampleService.Models
 {
     public class Imitation
     {
