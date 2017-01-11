@@ -14,7 +14,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using MobileAppDocDBOfflineSyncSample.Droid;
+using MobileAppDocDBOfflineSyncSample.DataModel.UWP;
 
 #if OFFLINE_SYNC_ENABLED
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;  // offline sync

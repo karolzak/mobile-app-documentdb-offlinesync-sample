@@ -127,6 +127,8 @@ Global
 		{843213BD-FBDB-43C7-8523-F6FF2293FB61}.Release|ARM.Deploy.0 = Release|ARM
 		{843213BD-FBDB-43C7-8523-F6FF2293FB61}.Release|iPhone.ActiveCfg = Release|x86
 		{843213BD-FBDB-43C7-8523-F6FF2293FB61}.Release|iPhoneSimulator.ActiveCfg = Release|x86
+		{843213BD-FBDB-43C7-8523-F6FF2293FB61}.Release|iPhoneSimulator.Build.0 = Release|x86
+		{843213BD-FBDB-43C7-8523-F6FF2293FB61}.Release|iPhoneSimulator.Deploy.0 = Release|x86
 		{843213BD-FBDB-43C7-8523-F6FF2293FB61}.Release|x64.ActiveCfg = Release|x64
 		{843213BD-FBDB-43C7-8523-F6FF2293FB61}.Release|x64.Build.0 = Release|x64
 		{843213BD-FBDB-43C7-8523-F6FF2293FB61}.Release|x64.Deploy.0 = Release|x64

@@ -15,10 +15,10 @@ namespace MobileAppDocDBOfflineSyncSample.iOS
         [JsonProperty(PropertyName = "version")]
         public byte[] Version { get; set; }
 
-        [JsonProperty(PropertyName = "createdat")]
+        [JsonProperty(PropertyName = "createdAt")]
         public DateTimeOffset? CreatedAt { get; set; }
 
-        [JsonProperty(PropertyName = "updatedat")]
+        [JsonProperty(PropertyName = "updatedAt")]
         public DateTimeOffset? UpdatedAt { get; set; }
 
         [JsonProperty(PropertyName = "deleted")]
