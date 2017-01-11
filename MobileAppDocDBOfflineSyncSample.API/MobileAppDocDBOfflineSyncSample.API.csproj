@@ -156,10 +156,13 @@
     <Reference Include="System.Web.Http.Tracing">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Tracing.5.2.3\lib\net45\System.Web.Http.Tracing.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +172,12 @@
     <Compile Include="Helpers\DocumentDBDomainManager.cs" />
     <Compile Include="Helpers\DocumentResource.cs" />
     <Compile Include="DataObjects\TodoItemDocDb.cs" />
+    <Compile Include="Models\Code.cs" />
+    <Compile Include="Models\Color.cs" />
+    <Compile Include="Models\FormulaComponent.cs" />
+    <Compile Include="Models\Imitation.cs" />
+    <Compile Include="Models\PaintSystem.cs" />
+    <Compile Include="Models\Variant.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -183,6 +192,12 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MobileAppDocDBOfflineSyncSample.Shared\MobileAppDocDBOfflineSyncSample.Shared.csproj">
+      <Project>{a37f4160-6f2d-433e-a5f3-29ac70bfbaf7}</Project>
+      <Name>MobileAppDocDBOfflineSyncSample.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
