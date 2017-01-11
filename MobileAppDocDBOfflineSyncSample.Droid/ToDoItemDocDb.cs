@@ -12,7 +12,20 @@ namespace MobileAppDocDBOfflineSyncSample.Droid
 
 		[JsonProperty(PropertyName = "complete")]
 		public bool Complete { get; set; }
-	}
+        
+
+        [JsonProperty(PropertyName = "version")]
+        public byte[] Version { get; set; }
+
+        [JsonProperty(PropertyName = "createdat")]
+        public DateTimeOffset? CreatedAt { get; set; }
+
+        [JsonProperty(PropertyName = "updatedat")]
+        public DateTimeOffset? UpdatedAt { get; set; }
+
+        [JsonProperty(PropertyName = "deleted")]
+        public bool Deleted { get; set; }
+    }
 
 	public class ToDoItemDocDbWrapper : Java.Lang.Object
 	{
