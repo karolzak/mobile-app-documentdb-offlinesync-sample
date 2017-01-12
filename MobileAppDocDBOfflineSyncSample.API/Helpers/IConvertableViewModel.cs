@@ -9,7 +9,7 @@ namespace MobileAppDocDBOfflineSyncSample.API.Helpers
 {
     public interface IConvertableViewModel<TDocument> : ITableData
     {
-        TDocument ConvertToDocument();
+        void ApplyToDocument(TDocument document);
 
         void CopyFromDocument(TDocument document);
     }

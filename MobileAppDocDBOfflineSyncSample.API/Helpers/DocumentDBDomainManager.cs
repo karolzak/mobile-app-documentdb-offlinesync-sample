@@ -67,7 +67,8 @@ namespace MobileAppDocDBOfflineSyncSampleService.Helpers
         {
             try
             {
-                var document = data.ConvertToDocument();
+                var document = this.GetDocument(data.Id);
+                data.ApplyToDocument(document);
 
                 document.CreatedAt = DateTimeOffset.UtcNow;
                 document.UpdatedAt = DateTimeOffset.UtcNow;
@@ -212,10 +213,10 @@ namespace MobileAppDocDBOfflineSyncSampleService.Helpers
             data.CreatedAt = DateTimeOffset.UtcNow;
 
             var doc = this.GetDocument(id);
-
+            data.ApplyToDocument(doc);
             try
             {
-                var replacedDoc = await Client.ReplaceDocumentAsync(doc.SelfLink, data.ConvertToDocument()).ContinueWith<TDocument>(t => GetDocFromResponse(t));
+                var replacedDoc = await Client.ReplaceDocumentAsync(doc.SelfLink, doc).ContinueWith<TDocument>(t => GetDocFromResponse(t));
                 TColorViewModel replacedViewModel = new TColorViewModel();
                 replacedViewModel.CopyFromDocument(replacedDoc);
                 return replacedViewModel;

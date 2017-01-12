@@ -193,12 +193,11 @@
   <ItemGroup>
     <Compile Include="App_Start\Startup.MobileApp.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
+    <Compile Include="Controllers\CodeController.cs" />
     <Compile Include="Controllers\ColorController.cs" />
-    <Compile Include="Controllers\TodoItemDocDbController.cs" />
     <Compile Include="Helpers\DocumentDBDomainManager.cs" />
     <Compile Include="Helpers\DocumentResource.cs" />
     <Compile Include="Helpers\IConvertableViewModel.cs" />
-    <Compile Include="Models\TodoItemDocDb.cs" />
     <Compile Include="Models\Code.cs" />
     <Compile Include="Models\Color.cs" />
     <Compile Include="Models\FormulaComponent.cs" />

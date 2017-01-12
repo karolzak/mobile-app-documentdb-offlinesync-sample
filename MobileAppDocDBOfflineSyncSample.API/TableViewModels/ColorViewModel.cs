@@ -26,19 +26,15 @@ namespace MobileAppDocDBOfflineSyncSample.API.TableViewModels
 
         public bool Deleted { get; set; }
 
-        public Color ConvertToDocument()
+        public void ApplyToDocument(Color document)
         {
-            return new Color()
-            {
-                Id = Id,
-                Name = Name,
-                Business = Business,
-                Market = Market,
-                Version = Version,
-                CreatedAt = CreatedAt,
-                UpdatedAt = UpdatedAt,
-                Deleted = Deleted,
-            };
+            document.Name = Name;
+            document.Business = Business;
+            document.Market = Market;
+            document.Version = Version;
+            document.CreatedAt = CreatedAt;
+            document.UpdatedAt = UpdatedAt;
+            document.Deleted = Deleted;
         }
 
         public void CopyFromDocument(Color document)
