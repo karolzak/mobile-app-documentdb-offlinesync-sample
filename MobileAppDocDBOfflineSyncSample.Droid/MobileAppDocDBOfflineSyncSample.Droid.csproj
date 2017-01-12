@@ -100,7 +100,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToDoActivity.cs" />
-    <Compile Include="ToDoItemDocDb.cs" />
+    <Compile Include="ToDoItemDocDbWrapper.cs" />
     <Compile Include="ToDoItemDocDbAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -126,5 +126,11 @@
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MobileAppDocDBOfflineSyncSample.Shared\MobileAppDocDBOfflineSyncSample.Shared.csproj">
+      <Project>{a37f4160-6f2d-433e-a5f3-29ac70bfbaf7}</Project>
+      <Name>MobileAppDocDBOfflineSyncSample.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

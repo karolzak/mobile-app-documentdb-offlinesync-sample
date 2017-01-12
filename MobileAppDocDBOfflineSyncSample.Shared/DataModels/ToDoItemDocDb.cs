@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace MobileAppDocDBOfflineSyncSample.Droid
+namespace MobileAppDocDBOfflineSyncSample.Shared.DataModels
 {
 	public class ToDoItemDocDb
 	{
@@ -12,8 +12,6 @@ namespace MobileAppDocDBOfflineSyncSample.Droid
 
 		[JsonProperty(PropertyName = "complete")]
 		public bool Complete { get; set; }
-        
-
         [JsonProperty(PropertyName = "version")]
         public byte[] Version { get; set; }
 
@@ -26,15 +24,5 @@ namespace MobileAppDocDBOfflineSyncSample.Droid
         [JsonProperty(PropertyName = "deleted")]
         public bool Deleted { get; set; }
     }
-
-	public class ToDoItemDocDbWrapper : Java.Lang.Object
-	{
-		public ToDoItemDocDbWrapper(ToDoItemDocDb item)
-		{
-			ToDoItem = item;
-		}
-
-		public ToDoItemDocDb ToDoItem { get; private set; }
-	}
 }
 

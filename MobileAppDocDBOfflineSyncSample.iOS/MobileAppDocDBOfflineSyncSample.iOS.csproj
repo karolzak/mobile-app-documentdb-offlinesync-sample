@@ -116,7 +116,6 @@
       <DependentUpon>QSTodoListViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="QSTodoService.cs" />
-    <Compile Include="ToDoItemDocDb.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard">
@@ -139,5 +138,11 @@
     <BundleResource Include="Resources\Default-Landscape.png" />
     <BundleResource Include="Resources\Default-Portrait%402x.png" />
     <BundleResource Include="Resources\Default-Landscape%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MobileAppDocDBOfflineSyncSample.Shared\MobileAppDocDBOfflineSyncSample.Shared.csproj">
+      <Project>{a37f4160-6f2d-433e-a5f3-29ac70bfbaf7}</Project>
+      <Name>MobileAppDocDBOfflineSyncSample.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

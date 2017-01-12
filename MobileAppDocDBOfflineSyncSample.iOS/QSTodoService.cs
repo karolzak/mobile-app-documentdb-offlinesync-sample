@@ -5,13 +5,14 @@
  *
  * For more information, see: http://go.microsoft.com/fwlink/?LinkId=717898
  */
-//#define OFFLINE_SYNC_ENABLED
+#define OFFLINE_SYNC_ENABLED
 
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.WindowsAzure.MobileServices;
+using MobileAppDocDBOfflineSyncSample.Shared.DataModels;
 
 #if OFFLINE_SYNC_ENABLED
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;  // offline sync
@@ -30,7 +31,7 @@ namespace MobileAppDocDBOfflineSyncSample.iOS
 #if OFFLINE_SYNC_ENABLED
         const string localDbPath    = "localstore.db";
 
-        private IMobileServiceSyncTable<ToDoItem> todoTable;
+        private IMobileServiceSyncTable<ToDoItemDocDb> todoTable;
 #else
         private IMobileServiceTable<ToDoItemDocDb> todoTable;
 #endif
@@ -47,7 +48,7 @@ namespace MobileAppDocDBOfflineSyncSample.iOS
             InitializeStoreAsync().Wait();
 
             // Create an MSTable instance to allow us to work with the TodoItem table
-            todoTable = client.GetSyncTable<ToDoItem>();
+            todoTable = client.GetSyncTable<ToDoItemDocDb>();
 #else
             todoTable = client.GetTable<ToDoItemDocDb>();
 #endif
@@ -65,7 +66,7 @@ namespace MobileAppDocDBOfflineSyncSample.iOS
         {
 #if OFFLINE_SYNC_ENABLED
             var store = new MobileServiceSQLiteStore(localDbPath);
-            store.DefineTable<ToDoItem>();
+            store.DefineTable<ToDoItemDocDb>();
 
             // Uses the default conflict handler, which fails on conflict
             // To use a different conflict handler, pass a parameter to InitializeAsync.

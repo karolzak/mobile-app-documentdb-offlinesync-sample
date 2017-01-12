@@ -3,6 +3,7 @@ using Android.App;
 using Android.Views;
 using Android.Widget;
 using System.Collections.Generic;
+using MobileAppDocDBOfflineSyncSample.Shared.DataModels;
 
 namespace MobileAppDocDBOfflineSyncSample.Droid
 {
