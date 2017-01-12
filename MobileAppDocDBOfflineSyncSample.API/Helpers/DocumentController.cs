@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace MobileAppDocDBOfflineSyncSampleService.Helpers
 {
-    public abstract class DocumentController<TDocument> : ApiController where TDocument : DocumentResource , new()
+    /*public abstract class DocumentController<TDocument> : ApiController where TDocument : DocumentResource , new()
     {
         //public ApiServices Services { get; set; }
 
@@ -165,5 +165,5 @@ namespace MobileAppDocDBOfflineSyncSampleService.Helpers
 
         }
 
-    }
+    }*/
 }

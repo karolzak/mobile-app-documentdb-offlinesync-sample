@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace MobileAppDocDBOfflineSyncSampleService.Models
 {
-    public class PaintSystem : DocumentResource, ITableData
+    /*public class PaintSystem : DocumentResource, ITableData
     {
         public DateTime FormulaCreationDate { get; set; }
 
         public List<FormulaComponent> Components { get; set; }
 
         public string State { get; set; }
-    }
+    }*/
 }

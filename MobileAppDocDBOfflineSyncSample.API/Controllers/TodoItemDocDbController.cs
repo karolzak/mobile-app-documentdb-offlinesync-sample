@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.OData;
-using MobileAppDocDBOfflineSyncSampleService.DataObjects;
 using MobileAppDocDBOfflineSyncSampleService.Helpers;
+using MobileAppDocDBOfflineSyncSampleService.Models;
 
 namespace MobileAppDocDBOfflineSyncSampleService.Controllers
 {
-    public class TodoItemDocDbController : TableController<TodoItemDocDb>
+    /*public class TodoItemDocDbController : TableController<TodoItemDocDb>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
         {
@@ -20,7 +20,7 @@ namespace MobileAppDocDBOfflineSyncSampleService.Controllers
             string databaseId = ConfigurationManager.AppSettings["databaseId"];
 
             //Using Custom Domain Manager
-            DomainManager = new DocumentDBDomainManager<TodoItemDocDb>(collectioName, databaseId, Request);//, Services);
+            //DomainManager = new DocumentDBDomainManager<TodoItemDocDb>(collectioName, databaseId, Request);//, Services);
         }
 
 
@@ -49,5 +49,5 @@ namespace MobileAppDocDBOfflineSyncSampleService.Controllers
         {
             return DeleteAsync(id);
         }
-    }
+    }*/
 }

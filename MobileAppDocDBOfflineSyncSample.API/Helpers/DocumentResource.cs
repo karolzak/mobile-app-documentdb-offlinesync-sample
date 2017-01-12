@@ -9,9 +9,8 @@ using System.Threading.Tasks;
 
 namespace MobileAppDocDBOfflineSyncSampleService.Helpers
 {
-    public abstract class DocumentResource : Document, ITableData 
+    public abstract class DocumentResource<TColorViewModel> : Document, ITableData 
     {
-       
         [JsonProperty(PropertyName = "id")]
         public override string Id { get; set; }
 
@@ -26,6 +25,5 @@ namespace MobileAppDocDBOfflineSyncSampleService.Helpers
 
         [JsonProperty(PropertyName = "deleted")]
         public bool Deleted { get; set; }
-
     }
 }

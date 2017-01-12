@@ -1,5 +1,6 @@
 ﻿using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Mobile.Server;
+using MobileAppDocDBOfflineSyncSample.API.TableViewModels;
 using MobileAppDocDBOfflineSyncSampleService.Helpers;
 using MobileAppDocDBOfflineSyncSampleService.Models;
 using System;
@@ -15,7 +16,7 @@ using System.Web.Http.OData;
 
 namespace MobileAppDocDBOfflineSyncSample.API.Controllers
 {
-    public class ColorController : TableController<Color>
+    public class ColorController : TableController<ColorViewModel>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
         {
@@ -25,32 +26,32 @@ namespace MobileAppDocDBOfflineSyncSample.API.Controllers
             string databaseId = ConfigurationManager.AppSettings["databaseId"];
 
             //Using Custom Domain Manager
-            DomainManager = new DocumentDBDomainManager<Color>(collectioName, databaseId, Request);
+            DomainManager = new DocumentDBDomainManager<Color, ColorViewModel>(collectioName, databaseId, Request);
         }
 
 
-        public IQueryable<Color> GetAllColors()
+        public IQueryable<ColorViewModel> GetAllColors()
         {
             return Query();
         }
 
-        public SingleResult<Color> GetTodoItem(string id)
+        public SingleResult<ColorViewModel> GetColor(string id)
         {
             return Lookup(id);
         }
 
-        public Task<Color> PatchTodoItem(string id, Delta<Color> patch)
+        public Task<ColorViewModel> PatchColor(string id, Delta<ColorViewModel> patch)
         {
             return UpdateAsync(id, patch);
         }
 
-        public async Task<IHttpActionResult> PostTodoItem(Color item)
+        public async Task<IHttpActionResult> PostColor(ColorViewModel item)
         {
-            Color current = await InsertAsync(item);
+            ColorViewModel current = await InsertAsync(item);
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
-        public Task DeleteTodoItem(string id)
+        public Task DeleteColor(string id)
         {
             return DeleteAsync(id);
         }
