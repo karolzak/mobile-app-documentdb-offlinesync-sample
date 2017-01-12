@@ -1,4 +1,5 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
+using MobileAppDocDBOfflineSyncSample.UWP;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -15,12 +16,12 @@ namespace MobileAppDocDBOfflineSyncSample
     {
         // This MobileServiceClient has been configured to communicate with the Azure Mobile Service and
         // Azure Gateway using the application key. You're all set to start working with your Mobile Service!
-        public static MobileServiceClient MobileService = new MobileServiceClient(
-            "https://XamarinMobileService.azurewebsites.net"
-        );
         //public static MobileServiceClient MobileService = new MobileServiceClient(
-        //    "http://localhost:50010/"
+        //    "https://XamarinMobileService.azurewebsites.net"
         //);
+        public static MobileServiceClient MobileService = new MobileServiceClient(
+            "http://localhost:50010/"
+        );
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -72,8 +73,14 @@ namespace MobileAppDocDBOfflineSyncSample
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                //rootFrame.Navigate(typeof(MainPage), e.Arguments);
+
+
+                rootFrame.Navigate(typeof(ColorsTestView), e.Arguments);
+
             }
+
+
             // Ensure the current window is active
             Window.Current.Activate();
         }

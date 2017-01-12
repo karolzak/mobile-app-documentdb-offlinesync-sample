@@ -36,6 +36,8 @@
   <ItemGroup>
     <Compile Include="Code.cs" />
     <Compile Include="ColorDto.cs" />
+    <Compile Include="DataModels\Code.cs" />
+    <Compile Include="DataModels\Color.cs" />
     <Compile Include="DataModels\ToDoItemDocDb.cs" />
     <Compile Include="FormulaDto.cs" />
     <Compile Include="Layer.cs" />
