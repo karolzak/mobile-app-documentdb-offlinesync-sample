@@ -10,7 +10,7 @@ using System.Text;
 
 namespace MobileAppDocDBOfflineSyncSampleService.Models
 {
-    public class Color : DocumentResource<ColorViewModel>, ITableData
+    public class Color : DocumentResource, ITableData
     {
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }

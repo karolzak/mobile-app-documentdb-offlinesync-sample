@@ -195,7 +195,6 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Controllers\ColorController.cs" />
     <Compile Include="Controllers\TodoItemDocDbController.cs" />
-    <Compile Include="Helpers\DocumentController.cs" />
     <Compile Include="Helpers\DocumentDBDomainManager.cs" />
     <Compile Include="Helpers\DocumentResource.cs" />
     <Compile Include="Helpers\IConvertableViewModel.cs" />

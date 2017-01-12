@@ -19,11 +19,10 @@ using MobileAppDocDBOfflineSyncSample.API.Helpers;
 namespace MobileAppDocDBOfflineSyncSampleService.Helpers
 {
     public class DocumentDBDomainManager<TDocument, TColorViewModel> : IDomainManager<TColorViewModel> 
-        where TDocument : DocumentResource<TColorViewModel>, ITableData
+        where TDocument : DocumentResource, ITableData
         where TColorViewModel : class, IConvertableViewModel<TDocument>, new()
     {
         public HttpRequestMessage Request { get; set; }
-        //public ApiServices Services { get; set; }
 
 
         private string _collectionId;
@@ -32,25 +31,12 @@ namespace MobileAppDocDBOfflineSyncSampleService.Helpers
         private DocumentCollection _collection;
         private DocumentClient _client;
 
-        public DocumentDBDomainManager(string collectionId, string databaseId, HttpRequestMessage request)//, ApiServices services)
+        public DocumentDBDomainManager(string collectionId, string databaseId, HttpRequestMessage request)
         {
             Request = request;
-            //Services = services;
             _collectionId = collectionId;
             _databaseId = databaseId;
         }
-
-    //    public DocumentDBDomainManager(HttpRequestMessage request, ApiServices services)
-    //{
-    //    var attribute = typeof(TDocument).GetCustomAttributes(typeof(DocumentAttribute), true).FirstOrDefault() as DocumentAttribute;
-    //    if (attribute == null)
-    //        throw new ArgumentException("the model class must be decorated with the Document attribute");
-
-    //    Request = request;
-    //    Services = services;
-    //    _collectionId = attribute.CollectionId;
-    //    _databaseId = attribute.DatabaseId;
-    //}
 
         public async Task<bool> DeleteAsync(string id)
         {
