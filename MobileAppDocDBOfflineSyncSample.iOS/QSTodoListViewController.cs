@@ -3,6 +3,7 @@ using System;
 using UIKit;
 using Foundation;
 using System.Threading.Tasks;
+using MobileAppDocDBOfflineSyncSample.Shared.DataModel;
 
 namespace MobileAppDocDBOfflineSyncSample.iOS
 {

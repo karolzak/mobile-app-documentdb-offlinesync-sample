@@ -1,9 +1,9 @@
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(MobileAppDocDBOfflineSyncSampleService.Startup))]
+[assembly: OwinStartup(typeof(MobileAppDocDBOfflineSyncSample.API.Startup))]
 
-namespace MobileAppDocDBOfflineSyncSampleService
+namespace MobileAppDocDBOfflineSyncSample.API
 {
     public partial class Startup
     {

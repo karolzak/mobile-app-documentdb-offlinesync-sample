@@ -100,7 +100,6 @@
     <Compile Include="Common\QuickStartTask.xaml.cs">
       <DependentUpon>QuickStartTask.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\TodoItemDocDb.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -134,6 +133,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MobileAppDocDBOfflineSyncSample.Shared\MobileAppDocDBOfflineSyncSample.Shared.csproj">
+      <Project>{a37f4160-6f2d-433e-a5f3-29ac70bfbaf7}</Project>
+      <Name>MobileAppDocDBOfflineSyncSample.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

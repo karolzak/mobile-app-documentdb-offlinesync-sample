@@ -5,7 +5,6 @@
  *
  * For more information, see: http://go.microsoft.com/fwlink/?LinkId=717898
  */
-#define OFFLINE_SYNC_ENABLED
 
 using System;
 using Android.OS;
@@ -15,11 +14,10 @@ using Android.Widget;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
+using MobileAppDocDBOfflineSyncSample.Shared.DataModel;
 
-#if OFFLINE_SYNC_ENABLED
 using Microsoft.WindowsAzure.MobileServices.Sync;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
-#endif
 
 namespace MobileAppDocDBOfflineSyncSample.Droid
 {
@@ -30,14 +28,10 @@ namespace MobileAppDocDBOfflineSyncSample.Droid
     {
         // Client reference.
         private MobileServiceClient client;
-
-#if OFFLINE_SYNC_ENABLED
+        
         private IMobileServiceSyncTable<ToDoItemDocDb> todoTable;
 
         const string localDbFilename = "localstore.db";
-#else
-        private IMobileServiceTable<ToDoItemDocDb> todoTable;
-#endif
 
         // Adapter to map the items list to the view
        
@@ -61,14 +55,12 @@ namespace MobileAppDocDBOfflineSyncSample.Droid
 
             // Create the client instance, using the mobile app backend URL.
             client = new MobileServiceClient(applicationURL);
-#if OFFLINE_SYNC_ENABLED
+
             await InitLocalStoreAsync();
 
             // Get the sync table instance to use to store TodoItem rows.
             todoTable = client.GetSyncTable<ToDoItemDocDb>();
-#else
-            todoTable = client.GetTable<ToDoItemDocDb>();
-#endif
+
 
             textNewToDo = FindViewById<EditText>(Resource.Id.textNewToDo);
 
@@ -80,8 +72,7 @@ namespace MobileAppDocDBOfflineSyncSample.Droid
             // Load the items from the mobile app backend.
             OnRefreshItemsSelected();
         }
-
-#if OFFLINE_SYNC_ENABLED
+        
         private async Task InitLocalStoreAsync()
         {
             var store = new MobileServiceSQLiteStore(localDbFilename);
@@ -109,7 +100,6 @@ namespace MobileAppDocDBOfflineSyncSample.Droid
                 CreateAndShowDialog(e, "Error");
             }
         }
-#endif
 
         //Initializes the activity menu
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -134,10 +124,8 @@ namespace MobileAppDocDBOfflineSyncSample.Droid
         // Called when the refresh menu option is selected.
         private async void OnRefreshItemsSelected()
         {
-#if OFFLINE_SYNC_ENABLED
 			// Get changes from the mobile app backend.
             await SyncAsync(pullData: true);
-#endif
 			// refresh view using local store.
             await RefreshItemsFromTableAsync();
         }
@@ -171,10 +159,8 @@ namespace MobileAppDocDBOfflineSyncSample.Droid
             try {
 				// Update the new item in the local store.
                 await todoTable.UpdateAsync(item);
-#if OFFLINE_SYNC_ENABLED
                 // Send changes to the mobile app backend.
 				await SyncAsync();
-#endif
 
                 if (item.Complete)
                     adapter.Remove(item);
@@ -201,10 +187,8 @@ namespace MobileAppDocDBOfflineSyncSample.Droid
             try {
 				// Insert the new item into the local store.
                 await todoTable.InsertAsync(item);
-#if OFFLINE_SYNC_ENABLED
                 // Send changes to the mobile app backend.
 				await SyncAsync();
-#endif
 
                 if (!item.Complete) {
                     adapter.Add(item);

@@ -5,7 +5,6 @@
  *
  * For more information, see: http://go.microsoft.com/fwlink/?LinkId=717898
  */
-#define OFFLINE_SYNC_ENABLED
 
 using Microsoft.WindowsAzure.MobileServices;
 using System;
@@ -14,52 +13,44 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using MobileAppDocDBOfflineSyncSample.DataModel.UWP;
 
-#if OFFLINE_SYNC_ENABLED
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;  // offline sync
 using Microsoft.WindowsAzure.MobileServices.Sync;         // offline sync
-#endif
+using MobileAppDocDBOfflineSyncSample.Shared.DataModel;
 
 namespace MobileAppDocDBOfflineSyncSample
 {
     public sealed partial class MainPage : Page
     {
-        private DateTimeOffset lastUpdateTimeStamp = DateTime.Now;
-        private MobileServiceCollection<TodoItemDocDb, TodoItemDocDb> items;
-#if OFFLINE_SYNC_ENABLED
-        private IMobileServiceSyncTable<TodoItemDocDb> todoTable = App.MobileService.GetSyncTable<TodoItemDocDb>(); // offline sync
-#else
-        private IMobileServiceTable<TodoItemDocDb> todoTable = App.MobileService.GetTable<TodoItemDocDb>();
-#endif
+        private MobileServiceCollection<ToDoItemDocDb, ToDoItemDocDb> todoItems;
+        private MobileServiceCollection<ComplexItem, ComplexItem> complexItems;
+        private IMobileServiceSyncTable<ComplexItem> complexTable = App.MobileService.GetSyncTable<ComplexItem>();
+        private IMobileServiceSyncTable<ToDoItemDocDb> todoTable = App.MobileService.GetSyncTable<ToDoItemDocDb>(); // offline sync
 
         public MainPage()
         {
             this.InitializeComponent();
+
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-#if OFFLINE_SYNC_ENABLED
             await InitLocalStoreAsync(); // offline sync
-#endif
             ButtonRefresh_Click(this, null);
         }
 
-        private async Task InsertTodoItem(TodoItemDocDb todoItem)
+        private async Task InsertTodoItem(ToDoItemDocDb todoItem)
         {
             // This code inserts a new TodoItem into the database. After the operation completes
             // and the mobile app backend has assigned an id, the item is added to the CollectionView.
             await todoTable.InsertAsync(todoItem);
-            items.Add(todoItem);
-
-#if OFFLINE_SYNC_ENABLED
+            todoItems.Add(todoItem);
+            
             try
             {
                 await App.MobileService.SyncContext.PushAsync();
             }
             catch { }
-#endif
         }
 
         private async Task RefreshTodoItems()
@@ -69,9 +60,13 @@ namespace MobileAppDocDBOfflineSyncSample
             {
                 // This code refreshes the entries in the list view by querying the TodoItems table.
                 // The query excludes completed TodoItems.
-                items = await todoTable
+                todoItems = await todoTable
                     .Where(todoItem => todoItem.Complete == false)
                     .ToCollectionAsync();
+
+                complexItems = await complexTable
+                     
+                     .ToCollectionAsync();
             }
             catch (MobileServiceInvalidOperationException e)
             {
@@ -88,35 +83,31 @@ namespace MobileAppDocDBOfflineSyncSample
             }
             else
             {
-                ListItems.ItemsSource = items;
+                ListItems.ItemsSource = todoItems;
                 this.ButtonSave.IsEnabled = true;
             }
         }
 
-        private async Task UpdateCheckedTodoItem(TodoItemDocDb item)
+        private async Task UpdateCheckedTodoItem(ToDoItemDocDb item)
         {
             // This code takes a freshly completed TodoItem and updates the database.
 			// After the MobileService client responds, the item is removed from the list.
             await todoTable.UpdateAsync(item);
-            items.Remove(item);
+            todoItems.Remove(item);
             ListItems.Focus(Windows.UI.Xaml.FocusState.Unfocused);
-
-#if OFFLINE_SYNC_ENABLED
+            
             try
             {
                 await App.MobileService.SyncContext.PushAsync();
             }
             catch { }
-#endif
         }
 
         private async void ButtonRefresh_Click(object sender, RoutedEventArgs e)
         {
             ButtonRefresh.IsEnabled = false;
-
-#if OFFLINE_SYNC_ENABLED
+            
             await SyncAsync(); // offline sync
-#endif
             await RefreshTodoItems();
 
             ButtonRefresh.IsEnabled = true;
@@ -124,7 +115,7 @@ namespace MobileAppDocDBOfflineSyncSample
 
         private async void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            var todoItem = new TodoItemDocDb { Text = TextInput.Text };
+            var todoItem = new ToDoItemDocDb { Text = TextInput.Text };
             TextInput.Text = "";
             await InsertTodoItem(todoItem);
         }
@@ -132,7 +123,7 @@ namespace MobileAppDocDBOfflineSyncSample
         private async void CheckBoxComplete_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox cb = (CheckBox)sender;
-            TodoItemDocDb item = cb.DataContext as TodoItemDocDb;
+            ToDoItemDocDb item = cb.DataContext as ToDoItemDocDb;
             await UpdateCheckedTodoItem(item);
         }
 
@@ -144,14 +135,14 @@ namespace MobileAppDocDBOfflineSyncSample
         }
 
         #region Offline sync
-#if OFFLINE_SYNC_ENABLED
         private async Task InitLocalStoreAsync()
         {
            if (!App.MobileService.SyncContext.IsInitialized)
            {
                var store = new MobileServiceSQLiteStore("localstore.db");
-               store.DefineTable<TodoItemDocDb>();
-               await App.MobileService.SyncContext.InitializeAsync(store);
+               store.DefineTable<ToDoItemDocDb>();
+                store.DefineTable<ComplexItem>();
+                await App.MobileService.SyncContext.InitializeAsync(store);
            }
 
            await SyncAsync();
@@ -165,12 +156,12 @@ namespace MobileAppDocDBOfflineSyncSample
 
                 await App.MobileService.SyncContext.PushAsync();
                 await todoTable.PullAsync("allTodoItemDocDb", todoTable.CreateQuery());
-                 //lastUpdateTimeStamp = DateTime.Now;
+                await complexTable.PullAsync("allComplexItem", complexTable.CreateQuery());
+                //lastUpdateTimeStamp = DateTime.Now;
             }
             catch { }
 
         }
-#endif
         #endregion
     }
 }

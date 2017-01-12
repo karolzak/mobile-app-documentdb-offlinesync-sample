@@ -16,7 +16,7 @@ namespace MobileAppDocDBOfflineSyncSampleService.Controllers
         {
             base.Initialize(controllerContext);
 
-            string collectioName = ConfigurationManager.AppSettings["collectionName"];
+            string collectioName = ConfigurationManager.AppSettings["todoItemCollection"];
             string databaseId = ConfigurationManager.AppSettings["databaseId"];
 
             //Using Custom Domain Manager
