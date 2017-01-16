@@ -1,5 +1,5 @@
 
-# Azure Mobile Apps using DocumentDb + Incremental and online sync
+# Azure Mobile Apps using DocumentDb + Incremental and offline sync
 
 This is a proof of concept project where we tight up a DocumentDB instance with complex (nested) types with several SQLite mobile clients using Azure Mobile Apps with Offline Sync. In this project we are trying to achieve following features:
 
@@ -38,3 +38,6 @@ Key points:
 ```
 Unfortunately, nested objects/collections can only be stored as strings/JSON in SQLite store on mobile client: 
 ![alt text](https://github.com/karolzak/Mobile-App-DocumentDB-OfflineSync-Sample/blob/master/sqlite_stored_data.png "SQLite data")
+
+We achieved this by implementing a [custom Expand attribute](https://github.com/karolzak/Mobile-App-DocumentDB-OfflineSync-Sample/blob/master/MobileAppDocDBOfflineSyncSample.API/Helpers/QueryableExpandAttribute.cs) to include nested objects when sending data from Azure Mobile App to client.
+We used it in our TableController [here](https://github.com/karolzak/Mobile-App-DocumentDB-OfflineSync-Sample/blob/master/MobileAppDocDBOfflineSyncSample.API/Controllers/ComplexItemController.cs#27)
